@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { @apply bg-white text-black; }
+  body { @apply font-sans antialiased; }
+}
+
+/* Brand helpers */
+@layer utilities {
+  .bg-brand { @apply bg-brand-navy; }
+  .text-brand { @apply text-brand-gray; }
+  .btn-brand { @apply bg-brand-blue text-white hover:brightness-110; }
+}
