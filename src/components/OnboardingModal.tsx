@@ -34,6 +34,7 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
   const [name, setName] = useState(globalFormData.name);
   const [email, setEmail] = useState(globalFormData.email);
   const [company, setCompany] = useState(globalFormData.company);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   const totalSteps = 3;
@@ -58,6 +59,7 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
   useEffect(() => {
     if (isOpen) {
       setStep(1);
+      setIsSubmitted(false);
       // Don't reset form data - keep global data
       setGoal(globalFormData.main_goal);
       setUseCases(globalFormData.automation_areas);
@@ -115,6 +117,7 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
 
       if (response.ok) {
         console.log('Form submitted successfully');
+        setIsSubmitted(true);
         // Reset global form data after successful submission
         globalFormData = {
           main_goal: '',
@@ -123,7 +126,10 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
           email: '',
           company: ''
         };
-        onClose();
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          onClose();
+        }, 3000);
       } else {
         const errorText = await response.text();
         console.error('Failed to submit form:', response.status, errorText);
@@ -176,7 +182,24 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
 
         {/* Content */}
         <div className="px-6 py-5">
-          {step === 1 && (
+          {isSubmitted ? (
+            <div className="text-center space-y-6 animate-in fade-in duration-500">
+              <div className="w-16 h-16 mx-auto bg-green-500/20 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold text-custom-light">Thank You!</h3>
+                <p className="text-custom-light/80 text-sm leading-relaxed">
+                  We've received your information and will get back to you soon with your personalized automation solution.
+                </p>
+                <p className="text-custom-light/60 text-xs">
+                  This window will close automatically in a few seconds...
+                </p>
+              </div>
+            </div>
+          ) : step === 1 && (
             <div className="space-y-4 animate-in slide-in-from-left duration-300">
               <p className="text-sm text-custom-light/80 font-semibold">What is your main goal?</p>
               <div className="space-y-3">
@@ -291,35 +314,37 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
         </div>
 
         {/* Footer actions */}
-        <div className="px-6 py-5 flex items-center justify-between border-t border-custom-light/10">
+        {!isSubmitted && (
+          <div className="px-6 py-5 flex items-center justify-between border-t border-custom-light/10">
             <button
-            onClick={() => setStep((s) => Math.max(1, s - 1))}
-            className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-              step === 1
-                ? 'invisible'
-                : 'border-custom-light/20 text-custom-light/80 hover:border-custom-light/40 hover:bg-custom-light/5'
-            }`}
-          >
-            Back
-          </button>
-          {step < totalSteps ? (
-            <button
-              disabled={!canNext}
-              onClick={() => setStep((s) => Math.min(totalSteps, s + 1))}
-              className={`px-5 py-2 rounded-lg text-sm font-bold bg-custom-light text-custom-dark hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm active:translate-y-[1px]`}
+              onClick={() => setStep((s) => Math.max(1, s - 1))}
+              className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                step === 1
+                  ? 'invisible'
+                  : 'border-custom-light/20 text-custom-light/80 hover:border-custom-light/40 hover:bg-custom-light/5'
+              }`}
             >
-              Next
+              Back
             </button>
-          ) : (
-            <button
-              disabled={!canNext}
-              onClick={handleSubmit}
-              className={`px-5 py-2 rounded-lg text-sm font-bold bg-custom-light text-custom-dark hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm active:translate-y-[1px]`}
-            >
-              🚀 Start Free Consultation
-            </button>
-          )}
-        </div>
+            {step < totalSteps ? (
+              <button
+                disabled={!canNext}
+                onClick={() => setStep((s) => Math.min(totalSteps, s + 1))}
+                className={`px-5 py-2 rounded-lg text-sm font-bold bg-custom-light text-custom-dark hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm active:translate-y-[1px]`}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                disabled={!canNext}
+                onClick={handleSubmit}
+                className={`px-5 py-2 rounded-lg text-sm font-bold bg-custom-light text-custom-dark hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm active:translate-y-[1px]`}
+              >
+                🚀 Start Free Consultation
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
