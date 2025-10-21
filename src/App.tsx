@@ -61,7 +61,7 @@ function HomePage() {
     setSubmitMessage('');
 
     try {
-      const response = await fetch('https://n8nn.xyz/webhook/contact-form-v2', {
+      const response = await fetch('https://n8nn.xyz/webhook/form-submission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
