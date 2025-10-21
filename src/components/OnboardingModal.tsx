@@ -75,8 +75,34 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
   };
 
   const handleSubmit = async () => {
-    // You can wire to your backend/webhook here. For now just close.
-    onClose();
+    try {
+      const response = await fetch('https://n8nn.xyz/webhook/form-submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          goal: goal,
+          useCases: useCases,
+          name: name,
+          email: email,
+          company: company,
+          timestamp: new Date().toISOString(),
+          source: 'onboarding-modal'
+        })
+      });
+
+      if (response.ok) {
+        // Success - close modal
+        onClose();
+      } else {
+        throw new Error('Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Still close modal even if submission fails
+      onClose();
+    }
   };
 
   if (!isOpen) return null;
