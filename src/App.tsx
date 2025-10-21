@@ -443,10 +443,10 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  Shopify Store Boosts Sales by 150%
+                  Shopify Store Automates Visual Content by 150%
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated product management and order processing for a Shopify store, resulting in massive sales growth and streamlined operations.
+                  Automated visual content generation and product image processing for a Shopify store, creating thousands of marketing visuals and boosting conversion rates.
                 </p>
                 <Link to="/shopify-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
                   Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
@@ -463,10 +463,10 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  Design Agency Cuts Project Time by 60%
+                  Design Agency Automates Visual Production by 60%
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated design workflows and asset management for a creative agency, enabling faster project delivery and improved client satisfaction.
+                  Automated visual content creation and batch processing for a creative agency, generating hundreds of marketing materials and social media visuals daily.
                 </p>
                 <Link to="/graphic-design-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
                   Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
@@ -483,10 +483,10 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  E-commerce Platform Reduces Costs by 40%
+                  E-commerce Platform Automates Visual Assets by 40%
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated order processing and customer service for an online marketplace, significantly reducing operational costs and improving efficiency.
+                  Automated product visualization and marketing asset generation for an online marketplace, creating personalized product images and promotional content at scale.
                 </p>
                 <Link to="/ecommerce-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
                   Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
