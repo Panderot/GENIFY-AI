@@ -18,13 +18,22 @@ type UseCaseOption =
   | 'Data processing'
   | 'Customer support';
 
+// Global form data that persists across modal sessions
+let globalFormData = {
+  main_goal: '',
+  automation_areas: [] as UseCaseOption[],
+  name: '',
+  email: '',
+  company: ''
+};
+
 export default function OnboardingModal({ isOpen, onClose }: Props) {
   const [step, setStep] = useState(1);
-  const [goal, setGoal] = useState<GoalOption | ''>('');
-  const [useCases, setUseCases] = useState<UseCaseOption[]>([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [company, setCompany] = useState('');
+  const [goal, setGoal] = useState<GoalOption | ''>(globalFormData.main_goal);
+  const [useCases, setUseCases] = useState<UseCaseOption[]>(globalFormData.automation_areas);
+  const [name, setName] = useState(globalFormData.name);
+  const [email, setEmail] = useState(globalFormData.email);
+  const [company, setCompany] = useState(globalFormData.company);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   const totalSteps = 3;
@@ -49,11 +58,12 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
   useEffect(() => {
     if (isOpen) {
       setStep(1);
-      setGoal('');
-      setUseCases([]);
-      setName('');
-      setEmail('');
-      setCompany('');
+      // Don't reset form data - keep global data
+      setGoal(globalFormData.main_goal);
+      setUseCases(globalFormData.automation_areas);
+      setName(globalFormData.name);
+      setEmail(globalFormData.email);
+      setCompany(globalFormData.company);
     }
   }, [isOpen]);
 
@@ -65,9 +75,12 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
   }, [step, goal, useCases, name, email]);
 
   const toggleUseCase = (value: UseCaseOption) => {
-    setUseCases((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-    );
+    setUseCases((prev) => {
+      const newUseCases = prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value];
+      globalFormData.automation_areas = newUseCases;
+      console.log('Automation areas updated:', newUseCases);
+      return newUseCases;
+    });
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -76,30 +89,25 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
 
   const handleSubmit = async () => {
     try {
-      console.log('Submitting form data:', {
-        name: name,
-        email: email,
-        company: company,
-        goal: goal,
-        useCases: useCases,
+      // Use global form data to ensure all values are included
+      const submitData = {
+        name: globalFormData.name,
+        email: globalFormData.email,
+        company: globalFormData.company,
+        main_goal: globalFormData.main_goal,
+        automation_areas: globalFormData.automation_areas,
         timestamp: new Date().toISOString(),
         source: 'onboarding-modal'
-      });
+      };
+
+      console.log('Submitting form data:', submitData);
 
       const response = await fetch('https://n8nn.xyz/webhook/form-submission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          company: company,
-          goal: goal,
-          useCases: useCases,
-          timestamp: new Date().toISOString(),
-          source: 'onboarding-modal'
-        })
+        body: JSON.stringify(submitData)
       });
 
       console.log('Response status:', response.status);
@@ -107,6 +115,14 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
 
       if (response.ok) {
         console.log('Form submitted successfully');
+        // Reset global form data after successful submission
+        globalFormData = {
+          main_goal: '',
+          automation_areas: [],
+          name: '',
+          email: '',
+          company: ''
+        };
         onClose();
       } else {
         const errorText = await response.text();
@@ -186,7 +202,11 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
                         type="radio"
                         className="h-4 w-4 accent-custom-light"
                         checked={selected}
-                        onChange={() => setGoal(opt)}
+                        onChange={() => {
+                          setGoal(opt);
+                          globalFormData.main_goal = opt;
+                          console.log('Main goal updated:', opt);
+                        }}
                       />
                       <span className="text-sm text-custom-light/90 leading-relaxed">{opt}</span>
                     </label>
@@ -239,19 +259,31 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
                 className="w-full rounded-xl border border-custom-light/10 bg-custom-light/5 px-4 py-3 text-sm text-custom-light placeholder-custom-light/40 outline-none focus:border-custom-light"
                 placeholder="Your Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  globalFormData.name = e.target.value;
+                  console.log('Name updated:', e.target.value);
+                }}
               />
               <input
                 className="w-full rounded-xl border border-custom-light/10 bg-custom-light/5 px-4 py-3 text-sm text-custom-light placeholder-custom-light/40 outline-none focus:border-custom-light"
                 placeholder="Your Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  globalFormData.email = e.target.value;
+                  console.log('Email updated:', e.target.value);
+                }}
               />
               <input
                 className="w-full rounded-xl border border-custom-light/10 bg-custom-light/5 px-4 py-3 text-sm text-custom-light placeholder-custom-light/40 outline-none focus:border-custom-light"
                 placeholder="Your Company"
                 value={company}
-                onChange={(e) => setCompany(e.target.value)}
+                onChange={(e) => {
+                  setCompany(e.target.value);
+                  globalFormData.company = e.target.value;
+                  console.log('Company updated:', e.target.value);
+                }}
               />
               <p className="text-[11px] text-custom-light/50">By submitting, you agree to our Privacy Policy</p>
             </div>
