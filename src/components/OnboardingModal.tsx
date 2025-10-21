@@ -76,32 +76,47 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
 
   const handleSubmit = async () => {
     try {
+      console.log('Submitting form data:', {
+        name: name,
+        email: email,
+        company: company,
+        goal: goal,
+        useCases: useCases,
+        timestamp: new Date().toISOString(),
+        source: 'onboarding-modal'
+      });
+
       const response = await fetch('https://n8nn.xyz/webhook/form-submission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          goal: goal,
-          useCases: useCases,
           name: name,
           email: email,
           company: company,
+          goal: goal,
+          useCases: useCases,
           timestamp: new Date().toISOString(),
           source: 'onboarding-modal'
         })
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response:', response);
+
       if (response.ok) {
-        // Success - close modal
+        console.log('Form submitted successfully');
         onClose();
       } else {
-        throw new Error('Failed to submit form');
+        const errorText = await response.text();
+        console.error('Failed to submit form:', response.status, errorText);
+        throw new Error(`Failed to submit form: ${response.status}`);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      // Still close modal even if submission fails
-      onClose();
+      alert('Form gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+      // Don't close modal on error so user can try again
     }
   };
 
