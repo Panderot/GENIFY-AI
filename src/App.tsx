@@ -235,7 +235,7 @@ function HomePage() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                 >
-                  500+
+                  0+
                 </motion.span> Businesses
               </motion.div>
               <motion.h1 
