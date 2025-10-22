@@ -275,11 +275,11 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
                         }}
                       />
                       <span className="text-sm text-custom-light/90 leading-relaxed">{opt}</span>
-                    </label>
+                    </motion.label>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {step === 2 && (

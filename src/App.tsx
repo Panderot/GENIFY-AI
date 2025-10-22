@@ -292,7 +292,7 @@ function HomePage() {
                   </span>
                 </motion.a>
               </motion.div>
-            </div>
+            </motion.div>
             <div className="flex justify-center lg:justify-end animate-in slide-in-from-right duration-1000 delay-300">
               <div className="relative">
                 <div className="w-[28rem] h-[28rem] border-2 border-dashed border-custom-dark/30 rounded-full flex items-center justify-center relative animate-spin-slow">
