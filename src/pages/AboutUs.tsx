@@ -191,7 +191,7 @@ function AboutUs() {
                     <ul className="space-y-4">
                       <li className="flex items-start">
                         <span className="w-2 h-2 bg-custom-dark rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                        <span className="text-custom-dark/70 text-base font-light">Trusted by 500+ businesses across various industries</span>
+                        <span className="text-custom-dark/70 text-base font-light">Trusted 500+ businesses across various industries</span>
                       </li>
                       <li className="flex items-start">
                         <span className="w-2 h-2 bg-custom-dark rounded-full mt-2 mr-3 flex-shrink-0"></span>
