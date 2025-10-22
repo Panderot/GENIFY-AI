@@ -20,3 +20,4 @@ const ScrollProgress: React.FC = () => {
 };
 
 export default ScrollProgress;
+

@@ -35,3 +35,4 @@ const CountUp: React.FC<CountUpProps> = ({
 };
 
 export default CountUp;
+

@@ -22,3 +22,4 @@ const AnimatedPage: React.FC<AnimatedPageProps> = ({ children, className = '' })
 };
 
 export default AnimatedPage;
+
