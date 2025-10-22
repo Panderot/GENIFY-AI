@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { Menu, X, Check, ArrowRight, Users, Zap, Shield, Target, Globe, Mail, Phone, MapPin, Star, TrendingUp, Award, Sparkles, Layers, Cpu } from 'lucide-react';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
@@ -14,26 +15,46 @@ import HealthcareSuccessStory from './pages/HealthcareSuccessStory';
 import ShopifySuccessStory from './pages/ShopifySuccessStory';
 import GraphicDesignSuccessStory from './pages/GraphicDesignSuccessStory';
 import OnboardingModal from './components/OnboardingModal';
+import AnimatedPage from './components/AnimatedPage';
+import ScrollProgress from './components/ScrollProgress';
+import ScrollAnimation from './components/ScrollAnimation';
+import CountUp from './components/CountUp';
+import { motion } from 'framer-motion';
+import { heroVariants, textStaggerVariants, textItemVariants, cardHoverVariants, scaleVariants } from './animations/variants';
+import './styles/animations.css';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/workflow-optimization" element={<WorkflowOptimization />} />
-        <Route path="/system-integration" element={<SystemIntegration />} />
-        <Route path="/custom-solutions" element={<CustomSolutions />} />
-        <Route path="/fintech-success-story" element={<FintechSuccessStory />} />
-        <Route path="/ecommerce-success-story" element={<EcommerceSuccessStory />} />
-        <Route path="/healthcare-success-story" element={<HealthcareSuccessStory />} />
-        <Route path="/shopify-success-story" element={<ShopifySuccessStory />} />
-        <Route path="/graphic-design-success-story" element={<GraphicDesignSuccessStory />} />
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+      <AppContent />
     </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  
+  return (
+    <>
+      <ScrollProgress />
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/privacy-policy" element={<AnimatedPage><PrivacyPolicy /></AnimatedPage>} />
+          <Route path="/terms-of-service" element={<AnimatedPage><TermsOfService /></AnimatedPage>} />
+          <Route path="/cookie-policy" element={<AnimatedPage><CookiePolicy /></AnimatedPage>} />
+          <Route path="/about-us" element={<AnimatedPage><AboutUs /></AnimatedPage>} />
+          <Route path="/workflow-optimization" element={<AnimatedPage><WorkflowOptimization /></AnimatedPage>} />
+          <Route path="/system-integration" element={<AnimatedPage><SystemIntegration /></AnimatedPage>} />
+          <Route path="/custom-solutions" element={<AnimatedPage><CustomSolutions /></AnimatedPage>} />
+          <Route path="/fintech-success-story" element={<AnimatedPage><FintechSuccessStory /></AnimatedPage>} />
+          <Route path="/ecommerce-success-story" element={<AnimatedPage><EcommerceSuccessStory /></AnimatedPage>} />
+          <Route path="/healthcare-success-story" element={<AnimatedPage><HealthcareSuccessStory /></AnimatedPage>} />
+          <Route path="/shopify-success-story" element={<AnimatedPage><ShopifySuccessStory /></AnimatedPage>} />
+          <Route path="/graphic-design-success-story" element={<AnimatedPage><GraphicDesignSuccessStory /></AnimatedPage>} />
+          <Route path="/" element={<AnimatedPage><HomePage /></AnimatedPage>} />
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -94,14 +115,21 @@ function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
-            <div className="flex items-center group cursor-pointer transform hover:scale-105 transition-all duration-500">
-              <img 
+            <motion.div 
+              className="flex items-center group cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+            >
+              <motion.img 
                 src="/genifyy_ai_logo.jpeg" 
                 alt="Genify AI Logo" 
-                className="w-10 h-10 rounded-xl shadow-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500"
+                className="w-10 h-10 rounded-xl shadow-2xl"
+                whileHover={{ scale: 1.1, rotate: 3 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               />
               <span className="ml-3 text-xl font-bold text-custom-dark group-hover:text-custom-dark/80 transition-all duration-500 tracking-wide bg-gradient-to-r from-custom-dark to-custom-dark/80 bg-clip-text text-transparent hover:from-custom-dark/90 hover:to-custom-dark/60">Genify AI</span>
-            </div>
+            </motion.div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
@@ -129,13 +157,24 @@ function HomePage() {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <button onClick={() => setIsWizardOpen(true)} className="bg-custom-dark text-custom-light px-5 py-2 rounded-lg hover:bg-custom-dark/80 transition-all duration-700 font-medium shadow-lg hover:shadow-custom-light/25 transform hover:-translate-y-1 hover:scale-105 relative overflow-hidden group animate-glow text-sm">
+              <motion.button 
+                onClick={() => setIsWizardOpen(true)} 
+                className="bg-custom-dark text-custom-light px-5 py-2 rounded-lg hover:bg-custom-dark/80 transition-all duration-700 font-medium shadow-lg hover:shadow-custom-light/25 relative overflow-hidden group text-sm"
+                whileHover={{ y: -2, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+              >
                 <span className="absolute inset-0 bg-gradient-to-r from-custom-light/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
                 <span className="relative flex items-center">
-                  <Sparkles className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-500" />
+                  <motion.div
+                    whileHover={{ rotate: 12 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                  >
+                    <Sparkles className="w-4 h-4 mr-2" />
+                  </motion.div>
                 Get Started
                 </span>
-              </button>
+              </motion.button>
             </div>
 
             {/* Mobile menu button */}
@@ -172,40 +211,87 @@ function HomePage() {
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-custom-light/30 rounded-full blur-3xl animate-float delay-1000"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div className="space-y-10 animate-in slide-in-from-left duration-1000">
-              <div className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark text-sm font-bold shadow-lg backdrop-blur-sm hover:scale-105 transition-all duration-700 cursor-pointer">
-                <Star className="w-5 h-5 mr-3 animate-spin" />
-                Trusted by 500+ Businesses
-              </div>
-              <h1 className="text-4xl md:text-5xl font-black text-custom-dark leading-tight hover:text-custom-dark/80 transition-all duration-1000 cursor-default">
-                Transform Your 
-                <span className="block text-custom-dark/70 animate-pulse">
+            <motion.div 
+              className="space-y-10"
+              variants={heroVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.div 
+                className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark text-sm font-bold shadow-lg backdrop-blur-sm cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+              >
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                >
+                  <Star className="w-5 h-5 mr-3" />
+                </motion.div>
+                Trusted by <CountUp end={500} suffix="+" className="font-bold" /> Businesses
+              </motion.div>
+              <motion.h1 
+                className="text-4xl md:text-5xl font-black text-custom-dark leading-tight cursor-default"
+                variants={textStaggerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.span variants={textItemVariants}>Transform Your</motion.span>
+                <motion.span 
+                  className="block text-custom-dark/70"
+                  variants={textItemVariants}
+                >
                   Business Operations
-                </span>
-              </h1>
+                </motion.span>
+              </motion.h1>
               <p className="text-base text-custom-dark/60 leading-relaxed max-w-2xl font-light">
                 Increase efficiency and reduce costs with our intelligent automation solutions. Let us handle the repetitive work so you can focus on growth.
               </p>
-              <div className="flex flex-col sm:flex-row gap-8 pt-4">
-                <a 
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-8 pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: 'easeOut' }}
+              >
+                <motion.a 
                   href="https://wa.me/447576385099?text=Hello, I would like to get a free consultation" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="bg-custom-dark text-custom-light px-8 py-3 rounded-xl hover:bg-custom-dark/80 transition-all duration-700 font-semibold shadow-xl hover:shadow-custom-light/25 transform hover:-translate-y-2 hover:scale-105 relative overflow-hidden group text-base animate-glow inline-flex items-center justify-center"
+                  className="bg-custom-dark text-custom-light px-8 py-3 rounded-xl hover:bg-custom-dark/80 transition-all duration-700 font-semibold shadow-xl hover:shadow-custom-light/25 relative overflow-hidden group text-base inline-flex items-center justify-center"
+                  whileHover={{ y: -2, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-custom-light/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
                   <span className="relative flex items-center justify-center">
-                    <Zap className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-500" />
+                    <motion.div
+                      whileHover={{ rotate: 12 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                    >
+                      <Zap className="w-5 h-5 mr-2" />
+                    </motion.div>
                   Book Free Consultation
                   </span>
-                </a>
-                <a href="#solutions" className="border-2 border-custom-dark/30 text-custom-dark px-8 py-3 rounded-xl hover:bg-custom-light/60 hover:border-custom-dark hover:text-custom-dark transition-all duration-700 font-semibold backdrop-blur-sm hover:shadow-xl hover:scale-105 text-base group inline-flex items-center justify-center">
+                </motion.a>
+                <motion.a 
+                  href="#solutions" 
+                  className="border-2 border-custom-dark/30 text-custom-dark px-8 py-3 rounded-xl hover:bg-custom-light/60 hover:border-custom-dark hover:text-custom-dark transition-all duration-700 font-semibold backdrop-blur-sm hover:shadow-xl text-base group inline-flex items-center justify-center"
+                  whileHover={{ y: -2, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
                   <span className="flex items-center justify-center">
-                    <Layers className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-500" />
+                    <motion.div
+                      whileHover={{ rotate: 12 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                    >
+                      <Layers className="w-5 h-5 mr-2" />
+                    </motion.div>
                   View Solutions
                   </span>
-                </a>
-              </div>
+                </motion.a>
+              </motion.div>
             </div>
             <div className="flex justify-center lg:justify-end animate-in slide-in-from-right duration-1000 delay-300">
               <div className="relative">

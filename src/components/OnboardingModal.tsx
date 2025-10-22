@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { modalVariants, backdropVariants, slideVariants } from '../animations/variants';
 
 type Props = {
   isOpen: boolean;
@@ -142,20 +144,28 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
-      onMouseDown={handleBackdropClick}
-      aria-modal
-      role="dialog"
-    >
-      <div
-        ref={dialogRef}
-        className="w-full max-w-2xl mx-4 rounded-2xl bg-custom-dark text-custom-light shadow-2xl border border-custom-light/10 animate-in fade-in-0 zoom-in-95 duration-200"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onMouseDown={handleBackdropClick}
+          aria-modal
+          role="dialog"
+          variants={backdropVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <motion.div
+            ref={dialogRef}
+            className="w-full max-w-2xl mx-4 rounded-2xl bg-custom-dark text-custom-light shadow-2xl border border-custom-light/10"
+            onMouseDown={(e) => e.stopPropagation()}
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
         {/* Header */}
         <div className="p-6 pb-3 flex items-start justify-between">
           <div>
@@ -171,25 +181,50 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
               />
             </div>
           </div>
-          <button
+          <motion.button
             aria-label="Close"
             onClick={onClose}
             className="ml-4 text-custom-light/70 hover:text-custom-light p-1.5 rounded-md hover:bg-custom-light/10 transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
             <X className="h-5 w-5" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Content */}
         <div className="px-6 py-5">
           {isSubmitted ? (
-            <div className="text-center space-y-6 animate-in fade-in duration-500">
-              <div className="w-16 h-16 mx-auto bg-green-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <motion.div 
+              className="text-center space-y-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+            >
+              <motion.div 
+                className="w-16 h-16 mx-auto bg-green-500/20 rounded-full flex items-center justify-center"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: 'easeOut' }}
+              >
+                <motion.svg 
+                  className="w-8 h-8 text-green-400" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 0.4, duration: 0.6, ease: 'easeOut' }}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <div className="space-y-2">
+                </motion.svg>
+              </motion.div>
+              <motion.div 
+                className="space-y-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5, ease: 'easeOut' }}
+              >
                 <h3 className="text-xl font-bold text-custom-light">Thank You!</h3>
                 <p className="text-custom-light/80 text-sm leading-relaxed">
                   We've received your information and will get back to you soon with your personalized automation solution.
@@ -197,10 +232,15 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
                 <p className="text-custom-light/60 text-xs">
                   This window will close automatically in a few seconds...
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ) : step === 1 && (
-            <div className="space-y-4 animate-in slide-in-from-left duration-300">
+            <motion.div 
+              className="space-y-4"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+            >
               <p className="text-sm text-custom-light/80 font-semibold">What is your main goal?</p>
               <div className="space-y-3">
                 {(
@@ -213,13 +253,16 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
                 ).map((opt) => {
                   const selected = goal === opt;
                   return (
-                    <label
+                    <motion.label
                       key={opt}
                       className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all ${
                         selected
                           ? 'border-custom-light bg-custom-light/5 ring-1 ring-custom-light/60 shadow-[0_0_0_1px_rgba(240,241,240,0.6)_inset]'
                           : 'border-custom-light/10 hover:border-custom-light/20'
                       }`}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.2, ease: 'easeOut' }}
                     >
                       <input
                         type="radio"
@@ -345,8 +388,10 @@ export default function OnboardingModal({ isOpen, onClose }: Props) {
             )}
           </div>
         )}
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
