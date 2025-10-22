@@ -229,7 +229,14 @@ function HomePage() {
                 >
                   <Star className="w-5 h-5 mr-3" />
                 </motion.div>
-                Trusted by <CountUp end={500} suffix="+" className="font-bold" /> Businesses
+                Trusted by <motion.span 
+                  className="font-bold"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  500+
+                </motion.span> Businesses
               </motion.div>
               <motion.h1 
                 className="text-4xl md:text-5xl font-black text-custom-dark leading-tight cursor-default"
