@@ -229,7 +229,7 @@ function HomePage() {
                 >
                   <Star className="w-5 h-5 mr-3" />
                 </motion.div>
-                Trusted by <motion.span 
+                Trusted <motion.span 
                   className="font-bold"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -411,35 +411,9 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Starter Plan */}
-            <div className="bg-custom-light/40 backdrop-blur-xl border border-custom-light/60 rounded-3xl p-12 hover:shadow-2xl hover:shadow-custom-light/30 transition-all duration-700 hover:-translate-y-2 hover:scale-105 group animate-in slide-in-from-bottom duration-1000">
-              <h3 className="text-xl font-black text-custom-dark mb-4 group-hover:text-custom-dark/80 transition-colors duration-700">Starter</h3>
-              <p className="text-custom-dark/60 mb-10 text-base font-light leading-relaxed">Perfect for small teams and startups looking to automate basic processes.</p>
-              <div className="mb-10">
-                <span className="text-4xl font-black text-custom-dark group-hover:text-custom-dark/80 transition-all duration-700">$100</span>
-              </div>
-              <ul className="space-y-5 mb-12">
-                <li className="flex items-center">
-                  <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Up to 5 Workflows</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Basic Integrations</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Email Support</span>
-                </li>
-              </ul>
-              <button className="w-full border-2 border-custom-dark/30 text-custom-dark py-3 rounded-xl hover:bg-custom-light/60 hover:border-custom-dark hover:text-custom-dark transition-all duration-700 font-semibold text-base backdrop-blur-sm hover:shadow-xl hover:scale-105">
-                Choose Plan
-              </button>
-            </div>
-
+          <div className="flex justify-center">
             {/* Growth Plan */}
-            <div className="bg-custom-light/60 backdrop-blur-xl border-2 border-custom-dark/50 rounded-3xl p-12 relative hover:shadow-2xl hover:shadow-custom-light/40 transition-all duration-700 hover:-translate-y-4 transform scale-110 group animate-in slide-in-from-bottom duration-1000 delay-200">
+            <div className="bg-custom-light/60 backdrop-blur-xl border-2 border-custom-dark/50 rounded-3xl p-12 relative hover:shadow-2xl hover:shadow-custom-light/40 transition-all duration-700 hover:-translate-y-4 group animate-in slide-in-from-bottom duration-1000 delay-200 max-w-md">
               <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-custom-dark text-custom-light px-8 py-3 rounded-full text-sm font-black shadow-2xl animate-glow">
                 MOST POPULAR
               </div>
