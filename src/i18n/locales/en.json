@@ -1,0 +1,108 @@
+{
+  "navigation": {
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "successStories": "Success Stories",
+    "contact": "Contact",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "trustedBy": "Trusted",
+    "businesses": "Businesses",
+    "transformYour": "Transform Your",
+    "businessOperations": "Business Operations",
+    "description": "Increase efficiency and reduce costs with our intelligent automation solutions. Let us handle the repetitive work so you can focus on growth.",
+    "bookConsultation": "Book Free Consultation",
+    "viewSolutions": "View Solutions"
+  },
+  "solutions": {
+    "title": "What We Do",
+    "heading": "Business Optimization Solutions",
+    "description": "We offer comprehensive solutions to streamline every aspect of your business operations, tailored to your specific needs.",
+    "workflowOptimization": {
+      "title": "Workflow Optimization",
+      "description": "Streamline repetitive tasks and processes across all departments. Free up your team to focus on strategic initiatives that drive growth."
+    },
+    "systemIntegration": {
+      "title": "System Integration",
+      "description": "Connect disparate systems and applications, creating a unified platform for reliable data flow and streamlined business workflows."
+    },
+    "smartAnalytics": {
+      "title": "Smart Analytics",
+      "description": "Advanced analytics solutions to solve your unique business challenges. From predictive insights to intelligent data processing."
+    }
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "heading": "Flexible Pricing for Every Scale",
+    "description": "Transparent pricing plans designed to fit your business needs, from startups to large enterprises. No hidden fees, just pure value.",
+    "mostPopular": "MOST POPULAR",
+    "growth": {
+      "title": "Growth",
+      "description": "For growing businesses aiming to scale their operations efficiently.",
+      "price": "$200",
+      "features": {
+        "workflows": "Up to 15 Workflows",
+        "integrations": "Advanced Integrations",
+        "support": "Priority Support",
+        "accountManager": "Dedicated Account Manager"
+      },
+      "choosePlan": "Choose Plan"
+    }
+  },
+  "successStories": {
+    "title": "Client Success",
+    "heading": "Success Stories",
+    "description": "See how we've helped businesses like yours achieve remarkable results through intelligent automation.",
+    "statistics": {
+      "solutionsDelivered": "Solutions Delivered",
+      "hoursSaved": "Hours Saved for Clients",
+      "satisfactionRate": "Client Satisfaction Rate"
+    },
+    "shopify": {
+      "title": "Shopify Store Automates Visual Content by 150%",
+      "description": "Automated visual content generation and product image processing for a Shopify store, creating thousands of marketing visuals and boosting conversion rates.",
+      "readMore": "Read More"
+    },
+    "graphicDesign": {
+      "title": "Design Agency Automates Visual Production by 60%",
+      "description": "Automated visual content creation and batch processing for a creative agency, generating hundreds of marketing materials and social media visuals daily.",
+      "readMore": "Read More"
+    },
+    "ecommerce": {
+      "title": "E-commerce Platform Automates Visual Assets by 40%",
+      "description": "Automated product visualization and marketing asset generation for an online marketplace, creating personalized product images and promotional content at scale.",
+      "readMore": "Read More"
+    }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "heading": "Ready to Optimize Your Operations?",
+    "description": "Let's discuss how we can streamline your business processes. Fill out the form below or book a free consultation to get started.",
+    "form": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "message": "Tell us about your project...",
+      "sendMessage": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Thank you for your message! We'll get back to you soon.",
+      "errorMessage": "Sorry, there was an error sending your message. Please try again or contact us directly."
+    }
+  },
+  "footer": {
+    "description": "Transforming business operations through intelligent optimization and seamless integration solutions.",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "successStories": "Success Stories",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "copyright": "© 2025 Genify AI. All rights reserved."
+  },
+  "language": {
+    "switchTo": "Switch to",
+    "english": "English",
+    "turkish": "Türkçe"
+  }
+}

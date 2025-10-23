@@ -1,0 +1,108 @@
+{
+  "navigation": {
+    "solutions": "Çözümler",
+    "pricing": "Fiyatlandırma",
+    "successStories": "Başarı Hikayeleri",
+    "contact": "İletişim",
+    "getStarted": "Başlayın"
+  },
+  "hero": {
+    "trustedBy": "Güvenilen",
+    "businesses": "İşletme",
+    "transformYour": "İşletmenizi",
+    "businessOperations": "Dönüştürün",
+    "description": "Akıllı otomasyon çözümlerimizle verimliliği artırın ve maliyetleri düşürün. Tekrarlayan işleri biz halledelim, siz büyümeye odaklanın.",
+    "bookConsultation": "Ücretsiz Danışmanlık Alın",
+    "viewSolutions": "Çözümleri Görün"
+  },
+  "solutions": {
+    "title": "Ne Yapıyoruz",
+    "heading": "İşletme Optimizasyon Çözümleri",
+    "description": "İşletmenizin tüm operasyonlarını optimize etmek için kapsamlı çözümler sunuyoruz, özel ihtiyaçlarınıza göre uyarlanmış.",
+    "workflowOptimization": {
+      "title": "İş Akışı Optimizasyonu",
+      "description": "Tüm departmanlardaki tekrarlayan görevleri ve süreçleri optimize edin. Ekibinizin büyümeyi destekleyen stratejik girişimlere odaklanmasını sağlayın."
+    },
+    "systemIntegration": {
+      "title": "Sistem Entegrasyonu",
+      "description": "Farklı sistemleri ve uygulamaları birleştirerek, güvenilir veri akışı ve optimize edilmiş iş süreçleri için birleşik bir platform oluşturun."
+    },
+    "smartAnalytics": {
+      "title": "Akıllı Analitik",
+      "description": "Benzersiz işletme zorluklarınızı çözmek için gelişmiş analitik çözümler. Tahmine dayalı içgörülerden akıllı veri işlemeye kadar."
+    }
+  },
+  "pricing": {
+    "title": "Fiyatlandırma Planları",
+    "heading": "Her Ölçek İçin Esnek Fiyatlandırma",
+    "description": "Startup'lardan büyük kurumsal şirketlere kadar işletme ihtiyaçlarınıza uygun şeffaf fiyatlandırma planları. Gizli ücret yok, sadece saf değer.",
+    "mostPopular": "EN POPÜLER",
+    "growth": {
+      "title": "Büyüme",
+      "description": "Operasyonlarını verimli bir şekilde ölçeklendirmeyi hedefleyen büyüyen işletmeler için.",
+      "price": "$200",
+      "features": {
+        "workflows": "15'e Kadar İş Akışı",
+        "integrations": "Gelişmiş Entegrasyonlar",
+        "support": "Öncelikli Destek",
+        "accountManager": "Özel Hesap Yöneticisi"
+      },
+      "choosePlan": "Planı Seç"
+    }
+  },
+  "successStories": {
+    "title": "Müşteri Başarısı",
+    "heading": "Başarı Hikayeleri",
+    "description": "Sizin gibi işletmelerin akıllı otomasyonla olağanüstü sonuçlar elde etmesine nasıl yardımcı olduğumuzu görün.",
+    "statistics": {
+      "solutionsDelivered": "Teslim Edilen Çözüm",
+      "hoursSaved": "Müşteriler İçin Tasarruf Edilen Saat",
+      "satisfactionRate": "Müşteri Memnuniyet Oranı"
+    },
+    "shopify": {
+      "title": "Shopify Mağazası Görsel İçeriği %150 Otomatikleştirdi",
+      "description": "Bir Shopify mağazası için otomatik görsel içerik üretimi ve ürün görsel işleme, binlerce pazarlama görseli oluşturarak dönüşüm oranlarını artırdı.",
+      "readMore": "Devamını Oku"
+    },
+    "graphicDesign": {
+      "title": "Tasarım Ajansı Görsel Üretimi %60 Otomatikleştirdi",
+      "description": "Bir yaratıcı ajans için otomatik görsel içerik oluşturma ve toplu işleme, günlük yüzlerce pazarlama materyali ve sosyal medya görseli üretti.",
+      "readMore": "Devamını Oku"
+    },
+    "ecommerce": {
+      "title": "E-ticaret Platformu Görsel Varlıkları %40 Otomatikleştirdi",
+      "description": "Bir online pazar yeri için otomatik ürün görselleştirme ve pazarlama varlığı üretimi, ölçekte kişiselleştirilmiş ürün görselleri ve promosyon içeriği oluşturdu.",
+      "readMore": "Devamını Oku"
+    }
+  },
+  "contact": {
+    "title": "İletişime Geçin",
+    "heading": "Operasyonlarınızı Optimize Etmeye Hazır mısınız?",
+    "description": "İşletme süreçlerinizi nasıl optimize edebileceğimizi konuşalım. Aşağıdaki formu doldurun veya başlamak için ücretsiz bir danışmanlık alın.",
+    "form": {
+      "fullName": "Ad Soyad",
+      "email": "E-posta Adresi",
+      "message": "Projeniz hakkında bize bilgi verin...",
+      "sendMessage": "Mesaj Gönder",
+      "sending": "Gönderiliyor...",
+      "successMessage": "Mesajınız için teşekkürler! En kısa sürede size dönüş yapacağız.",
+      "errorMessage": "Üzgünüz, mesajınızı gönderirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan bizimle iletişime geçin."
+    }
+  },
+  "footer": {
+    "description": "Akıllı optimizasyon ve sorunsuz entegrasyon çözümleriyle işletme operasyonlarını dönüştürüyoruz.",
+    "company": "Şirket",
+    "aboutUs": "Hakkımızda",
+    "successStories": "Başarı Hikayeleri",
+    "legal": "Yasal",
+    "privacyPolicy": "Gizlilik Politikası",
+    "termsOfService": "Hizmet Şartları",
+    "cookiePolicy": "Çerez Politikası",
+    "copyright": "© 2025 Genify AI. Tüm hakları saklıdır."
+  },
+  "language": {
+    "switchTo": "Dil Değiştir",
+    "english": "English",
+    "turkish": "Türkçe"
+  }
+}

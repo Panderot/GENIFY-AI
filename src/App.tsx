@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Menu, X, Check, ArrowRight, Users, Zap, Shield, Target, Globe, Mail, Phone, MapPin, Star, TrendingUp, Award, Sparkles, Layers, Cpu } from 'lucide-react';
+import { Menu, X, Check, ArrowRight, Zap, Target, Globe, Mail, Star, TrendingUp, Award, Sparkles, Layers, Cpu } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import CookiePolicy from './pages/CookiePolicy';
@@ -17,10 +19,8 @@ import GraphicDesignSuccessStory from './pages/GraphicDesignSuccessStory';
 import OnboardingModal from './components/OnboardingModal';
 import AnimatedPage from './components/AnimatedPage';
 import ScrollProgress from './components/ScrollProgress';
-import ScrollAnimation from './components/ScrollAnimation';
-import CountUp from './components/CountUp';
 import { motion } from 'framer-motion';
-import { heroVariants, textStaggerVariants, textItemVariants, cardHoverVariants, scaleVariants } from './animations/variants';
+import { heroVariants, textStaggerVariants, textItemVariants } from './animations/variants';
 import './styles/animations.css';
 
 function App() {
@@ -59,6 +59,7 @@ function AppContent() {
 }
 
 function HomePage() {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -95,14 +96,14 @@ function HomePage() {
       });
 
       if (response.ok) {
-        setSubmitMessage('Thank you for your message! We\'ll get back to you soon.');
+        setSubmitMessage(t('contact.form.successMessage'));
         setFormData({ fullName: '', email: '', message: '' });
       } else {
         throw new Error('Failed to send message');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact us directly.');
+      setSubmitMessage(t('contact.form.errorMessage'));
     } finally {
       setIsSubmitting(false);
     }
@@ -134,29 +135,30 @@ function HomePage() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               <a href="#solutions" className="text-custom-dark/70 hover:text-custom-dark transition-all duration-500 font-medium relative group py-2 text-sm">
-                Solutions
+                {t('navigation.solutions')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-custom-dark rounded-full transition-all duration-500 group-hover:w-full"></span>
                 <span className="absolute inset-0 bg-custom-light/50 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 backdrop-blur-sm"></span>
               </a>
               <a href="#pricing" className="text-custom-dark/70 hover:text-custom-dark transition-all duration-500 font-medium relative group py-2 text-sm">
-                Pricing
+                {t('navigation.pricing')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-custom-dark rounded-full transition-all duration-500 group-hover:w-full"></span>
                 <span className="absolute inset-0 bg-custom-light/50 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 backdrop-blur-sm"></span>
               </a>
               <a href="#success" className="text-custom-dark/70 hover:text-custom-dark transition-all duration-500 font-medium relative group py-2 text-sm">
-                Success Stories
+                {t('navigation.successStories')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-custom-dark rounded-full transition-all duration-500 group-hover:w-full"></span>
                 <span className="absolute inset-0 bg-custom-light/50 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 backdrop-blur-sm"></span>
               </a>
               <a href="#contact" className="text-custom-dark/70 hover:text-custom-dark transition-all duration-500 font-medium relative group py-2 text-sm">
-                Contact
+                {t('navigation.contact')}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-custom-dark rounded-full transition-all duration-500 group-hover:w-full"></span>
                 <span className="absolute inset-0 bg-custom-light/50 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10 backdrop-blur-sm"></span>
               </a>
             </nav>
 
-            {/* CTA Button */}
-            <div className="hidden md:block">
+            {/* Language Switcher and CTA Button */}
+            <div className="hidden md:flex items-center space-x-4">
+              <LanguageSwitcher />
               <motion.button 
                 onClick={() => setIsWizardOpen(true)} 
                 className="bg-custom-dark text-custom-light px-5 py-2 rounded-lg hover:bg-custom-dark/80 transition-all duration-700 font-medium shadow-lg hover:shadow-custom-light/25 relative overflow-hidden group text-sm"
@@ -172,7 +174,7 @@ function HomePage() {
                   >
                     <Sparkles className="w-4 h-4 mr-2" />
                   </motion.div>
-                Get Started
+                {t('navigation.getStarted')}
                 </span>
               </motion.button>
             </div>
@@ -190,13 +192,16 @@ function HomePage() {
           {isMenuOpen && (
             <div className="md:hidden py-6 border-t border-custom-light/30 bg-custom-light/90 backdrop-blur-xl animate-in slide-in-from-top duration-700">
               <div className="flex flex-col space-y-4">
-                <a href="#solutions" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">Solutions</a>
-                <a href="#pricing" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">Pricing</a>
-                <a href="#success" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">Success Stories</a>
-                <a href="#contact" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">Contact</a>
-                <button onClick={() => setIsWizardOpen(true)} className="bg-custom-dark text-custom-light px-5 py-2 rounded-lg w-fit font-medium shadow-lg hover:shadow-custom-light/25 transform hover:scale-105 transition-all duration-700 text-sm">
-                  Get Started
-                </button>
+                <a href="#solutions" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">{t('navigation.solutions')}</a>
+                <a href="#pricing" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">{t('navigation.pricing')}</a>
+                <a href="#success" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">{t('navigation.successStories')}</a>
+                <a href="#contact" className="text-custom-dark/70 hover:text-custom-dark font-medium transition-all duration-500 hover:translate-x-2 text-sm">{t('navigation.contact')}</a>
+                <div className="flex items-center space-x-4 pt-2">
+                  <LanguageSwitcher />
+                  <button onClick={() => setIsWizardOpen(true)} className="bg-custom-dark text-custom-light px-5 py-2 rounded-lg w-fit font-medium shadow-lg hover:shadow-custom-light/25 transform hover:scale-105 transition-all duration-700 text-sm">
+                    {t('navigation.getStarted')}
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -229,14 +234,14 @@ function HomePage() {
                 >
                   <Star className="w-5 h-5 mr-3" />
                 </motion.div>
-                Trusted <motion.span 
+                {t('hero.trustedBy')} <motion.span 
                   className="font-bold"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5, duration: 0.5 }}
                 >
                   500+
-                </motion.span> Businesses
+                </motion.span> {t('hero.businesses')}
               </motion.div>
               <motion.h1 
                 className="text-4xl md:text-5xl font-black text-custom-dark leading-tight cursor-default"
@@ -244,16 +249,16 @@ function HomePage() {
                 initial="hidden"
                 animate="visible"
               >
-                <motion.span variants={textItemVariants}>Transform Your</motion.span>
+                <motion.span variants={textItemVariants}>{t('hero.transformYour')}</motion.span>
                 <motion.span 
                   className="block text-custom-dark/70"
                   variants={textItemVariants}
                 >
-                  Business Operations
+                  {t('hero.businessOperations')}
                 </motion.span>
               </motion.h1>
               <p className="text-base text-custom-dark/60 leading-relaxed max-w-2xl font-light">
-                Increase efficiency and reduce costs with our intelligent automation solutions. Let us handle the repetitive work so you can focus on growth.
+                {t('hero.description')}
               </p>
               <motion.div 
                 className="flex flex-col sm:flex-row gap-8 pt-4"
@@ -278,7 +283,7 @@ function HomePage() {
                     >
                       <Zap className="w-5 h-5 mr-2" />
                     </motion.div>
-                  Book Free Consultation
+                  {t('hero.bookConsultation')}
                   </span>
                 </motion.a>
                 <motion.a 
@@ -295,7 +300,7 @@ function HomePage() {
                     >
                       <Layers className="w-5 h-5 mr-2" />
                     </motion.div>
-                  View Solutions
+                  {t('hero.viewSolutions')}
                   </span>
                 </motion.a>
               </motion.div>
@@ -337,13 +342,13 @@ function HomePage() {
           <div className="text-center mb-24 animate-in fade-in duration-1000">
             <div className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark/70 text-sm font-bold mb-8 shadow-lg backdrop-blur-sm hover:scale-105 transition-all duration-700 cursor-pointer">
               <Target className="w-5 h-5 mr-3 animate-pulse" />
-              What We Do
+              {t('solutions.title')}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-custom-dark mb-8 hover:text-custom-dark/80 transition-all duration-1000 cursor-default">
-              Business Optimization Solutions
+              {t('solutions.heading')}
             </h2>
             <p className="text-base text-custom-dark/60 max-w-4xl mx-auto leading-relaxed font-light">
-              We offer comprehensive solutions to streamline every aspect of your business operations, tailored to your specific needs.
+              {t('solutions.description')}
             </p>
           </div>
 
@@ -355,10 +360,10 @@ function HomePage() {
                 <Zap className="w-10 h-10 text-white relative z-10 group-hover:animate-pulse" />
               </div>
               <h3 className="text-xl font-black text-custom-dark mb-8 group-hover:text-custom-dark/80 transition-colors duration-700">
-                Workflow Optimization
+                {t('solutions.workflowOptimization.title')}
               </h3>
               <p className="text-custom-dark/60 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                Streamline repetitive tasks and processes across all departments. Free up your team to focus on strategic initiatives that drive growth.
+                {t('solutions.workflowOptimization.description')}
               </p>
             </div>
 
@@ -369,10 +374,10 @@ function HomePage() {
                 <Globe className="w-10 h-10 text-white relative z-10 group-hover:animate-spin" />
               </div>
               <h3 className="text-xl font-black text-custom-dark mb-8 group-hover:text-custom-dark/80 transition-colors duration-700">
-                System Integration
+                {t('solutions.systemIntegration.title')}
               </h3>
               <p className="text-custom-dark/60 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                Connect disparate systems and applications, creating a unified platform for reliable data flow and streamlined business workflows.
+                {t('solutions.systemIntegration.description')}
               </p>
             </div>
 
@@ -383,10 +388,10 @@ function HomePage() {
                 <Target className="w-10 h-10 text-white relative z-10 group-hover:animate-bounce" />
               </div>
               <h3 className="text-xl font-black text-custom-dark mb-8 group-hover:text-custom-dark/80 transition-colors duration-700">
-                Smart Analytics
+                {t('solutions.smartAnalytics.title')}
               </h3>
               <p className="text-custom-dark/60 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                Advanced analytics solutions to solve your unique business challenges. From predictive insights to intelligent data processing.
+                {t('solutions.smartAnalytics.description')}
               </p>
             </div>
           </div>
@@ -401,13 +406,13 @@ function HomePage() {
           <div className="text-center mb-24 animate-in fade-in duration-1000">
             <div className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark/70 text-sm font-bold mb-8 shadow-lg backdrop-blur-sm hover:scale-105 transition-all duration-700 cursor-pointer">
               <TrendingUp className="w-5 h-5 mr-3 animate-bounce" />
-              Pricing Plans
+              {t('pricing.title')}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-custom-dark mb-8 hover:text-custom-dark/80 transition-all duration-1000 cursor-default">
-              Flexible Pricing for Every Scale
+              {t('pricing.heading')}
             </h2>
             <p className="text-base text-custom-dark/60 max-w-4xl mx-auto leading-relaxed font-light">
-              Transparent pricing plans designed to fit your business needs, from startups to large enterprises. No hidden fees, just pure value.
+              {t('pricing.description')}
             </p>
           </div>
 
@@ -415,35 +420,35 @@ function HomePage() {
             {/* Growth Plan */}
             <div className="bg-custom-light/60 backdrop-blur-xl border-2 border-custom-dark/50 rounded-3xl p-12 relative hover:shadow-2xl hover:shadow-custom-light/40 transition-all duration-700 hover:-translate-y-4 group animate-in slide-in-from-bottom duration-1000 delay-200 max-w-md">
               <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-custom-dark text-custom-light px-8 py-3 rounded-full text-sm font-black shadow-2xl animate-glow">
-                MOST POPULAR
+                {t('pricing.mostPopular')}
               </div>
-              <h3 className="text-xl font-black text-custom-dark mb-4 group-hover:text-custom-dark/80 transition-colors duration-700">Growth</h3>
-              <p className="text-custom-dark/60 mb-10 text-base font-light leading-relaxed">For growing businesses aiming to scale their operations efficiently.</p>
+              <h3 className="text-xl font-black text-custom-dark mb-4 group-hover:text-custom-dark/80 transition-colors duration-700">{t('pricing.growth.title')}</h3>
+              <p className="text-custom-dark/60 mb-10 text-base font-light leading-relaxed">{t('pricing.growth.description')}</p>
               <div className="mb-10">
-                <span className="text-4xl font-black text-custom-dark animate-pulse">$200</span>
+                <span className="text-4xl font-black text-custom-dark animate-pulse">{t('pricing.growth.price')}</span>
               </div>
               <ul className="space-y-5 mb-12">
                 <li className="flex items-center">
                   <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Up to 15 Workflows</span>
+                  <span className="text-custom-dark/70 text-base font-medium">{t('pricing.growth.features.workflows')}</span>
                 </li>
                 <li className="flex items-center">
                   <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Advanced Integrations</span>
+                  <span className="text-custom-dark/70 text-base font-medium">{t('pricing.growth.features.integrations')}</span>
                 </li>
                 <li className="flex items-center">
                   <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Priority Support</span>
+                  <span className="text-custom-dark/70 text-base font-medium">{t('pricing.growth.features.support')}</span>
                 </li>
                 <li className="flex items-center">
                   <Check className="w-7 h-7 text-custom-dark mr-5 group-hover:scale-110 transition-transform duration-500" />
-                  <span className="text-custom-dark/70 text-base font-medium">Dedicated Account Manager</span>
+                  <span className="text-custom-dark/70 text-base font-medium">{t('pricing.growth.features.accountManager')}</span>
                 </li>
               </ul>
               <button className="w-full bg-custom-dark text-custom-light py-3 rounded-xl hover:bg-custom-dark/80 transition-all duration-700 font-semibold text-base shadow-xl hover:shadow-custom-light/25 hover:scale-105 relative overflow-hidden group animate-glow">
                 <span className="absolute inset-0 bg-gradient-to-r from-custom-light/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
                 <span className="relative">
-                Choose Plan
+                {t('pricing.growth.choosePlan')}
                 </span>
               </button>
             </div>
@@ -463,7 +468,7 @@ function HomePage() {
               <div className="absolute inset-0 bg-custom-light/60 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 transform scale-95 group-hover:scale-105 backdrop-blur-sm"></div>
               <div className="relative z-10 py-16 px-10">
                 <div className="text-5xl md:text-6xl font-black text-custom-dark mb-6 group-hover:scale-125 transition-all duration-700 animate-pulse cursor-default">150+</div>
-                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">Solutions Delivered</div>
+                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">{t('successStories.statistics.solutionsDelivered')}</div>
                 <div className="w-20 h-1.5 bg-custom-dark mx-auto mt-6 rounded-full group-hover:w-32 transition-all duration-700"></div>
               </div>
             </div>
@@ -471,7 +476,7 @@ function HomePage() {
               <div className="absolute inset-0 bg-custom-light/60 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 transform scale-95 group-hover:scale-105 backdrop-blur-sm"></div>
               <div className="relative z-10 py-16 px-10">
                 <div className="text-5xl md:text-6xl font-black text-custom-dark mb-6 group-hover:scale-125 transition-all duration-700 animate-pulse cursor-default">40k+</div>
-                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">Hours Saved for Clients</div>
+                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">{t('successStories.statistics.hoursSaved')}</div>
                 <div className="w-20 h-1.5 bg-custom-dark mx-auto mt-6 rounded-full group-hover:w-32 transition-all duration-700"></div>
               </div>
             </div>
@@ -479,7 +484,7 @@ function HomePage() {
               <div className="absolute inset-0 bg-custom-light/60 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-700 transform scale-95 group-hover:scale-105 backdrop-blur-sm"></div>
               <div className="relative z-10 py-16 px-10">
                 <div className="text-5xl md:text-6xl font-black text-custom-dark mb-6 group-hover:scale-125 transition-all duration-700 animate-pulse cursor-default">99%</div>
-                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">Client Satisfaction Rate</div>
+                <div className="text-custom-dark/70 text-base font-bold tracking-wide group-hover:text-custom-dark transition-colors duration-700">{t('successStories.statistics.satisfactionRate')}</div>
                 <div className="w-20 h-1.5 bg-custom-dark mx-auto mt-6 rounded-full group-hover:w-32 transition-all duration-700"></div>
               </div>
             </div>
@@ -489,13 +494,13 @@ function HomePage() {
           <div className="text-center mb-24 animate-in fade-in duration-1000">
             <div className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark/70 text-sm font-bold mb-8 shadow-lg backdrop-blur-sm hover:scale-105 transition-all duration-700 cursor-pointer">
               <Award className="w-5 h-5 mr-3 animate-pulse" />
-              Client Success
+              {t('successStories.title')}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-custom-dark mb-8 hover:text-custom-dark/80 transition-all duration-1000 cursor-default">
-              Success Stories
+              {t('successStories.heading')}
             </h2>
             <p className="text-base text-custom-dark/60 max-w-4xl mx-auto leading-relaxed font-light">
-              See how we've helped businesses like yours achieve remarkable results through intelligent automation.
+              {t('successStories.description')}
             </p>
           </div>
 
@@ -510,13 +515,13 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  Shopify Store Automates Visual Content by 150%
+                  {t('successStories.shopify.title')}
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated visual content generation and product image processing for a Shopify store, creating thousands of marketing visuals and boosting conversion rates.
+                  {t('successStories.shopify.description')}
                 </p>
                 <Link to="/shopify-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
-                  Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
+                  {t('successStories.shopify.readMore')} <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
                 </Link>
               </div>
             </div>
@@ -530,13 +535,13 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  Design Agency Automates Visual Production by 60%
+                  {t('successStories.graphicDesign.title')}
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated visual content creation and batch processing for a creative agency, generating hundreds of marketing materials and social media visuals daily.
+                  {t('successStories.graphicDesign.description')}
                 </p>
                 <Link to="/graphic-design-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
-                  Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
+                  {t('successStories.graphicDesign.readMore')} <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
                 </Link>
               </div>
             </div>
@@ -550,13 +555,13 @@ function HomePage() {
               />
               <div className="p-10">
                 <h3 className="text-lg font-black text-custom-dark mb-6 group-hover:text-custom-dark/80 transition-colors duration-700">
-                  E-commerce Platform Automates Visual Assets by 40%
+                  {t('successStories.ecommerce.title')}
                 </h3>
                 <p className="text-custom-dark/60 mb-8 leading-relaxed text-base font-light group-hover:text-custom-dark/70 transition-colors duration-700">
-                  Automated product visualization and marketing asset generation for an online marketplace, creating personalized product images and promotional content at scale.
+                  {t('successStories.ecommerce.description')}
                 </p>
                 <Link to="/ecommerce-success-story" className="text-custom-dark hover:text-custom-dark/80 font-black flex items-center text-base group-hover:translate-x-4 transition-all duration-700">
-                  Read More <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
+                  {t('successStories.ecommerce.readMore')} <ArrowRight className="w-6 h-6 ml-3 group-hover:rotate-12 transition-transform duration-700" />
                 </Link>
               </div>
             </div>
@@ -573,13 +578,13 @@ function HomePage() {
           <div className="text-center mb-20 relative z-10 animate-in fade-in duration-1000">
             <div className="inline-flex items-center px-6 py-3 bg-custom-light/60 border border-custom-light/70 rounded-full text-custom-dark/70 text-sm font-bold mb-8 shadow-lg backdrop-blur-sm hover:scale-105 transition-all duration-700 cursor-pointer">
               <Mail className="w-5 h-5 mr-3 animate-bounce" />
-              Get In Touch
+              {t('contact.title')}
             </div>
             <h2 className="text-3xl md:text-4xl font-black text-custom-dark mb-8 hover:text-custom-dark/80 transition-all duration-1000 cursor-default">
-              Ready to Optimize Your Operations?
+              {t('contact.heading')}
             </h2>
             <p className="text-base text-custom-dark/60 leading-relaxed font-light">
-              Let's discuss how we can streamline your business processes. Fill out the form below or book a free consultation to get started.
+              {t('contact.description')}
             </p>
           </div>
 
@@ -588,7 +593,7 @@ function HomePage() {
               <input
                 type="text"
                 name="fullName"
-                placeholder="Full Name"
+                placeholder={t('contact.form.fullName')}
                 value={formData.fullName}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
@@ -601,7 +606,7 @@ function HomePage() {
               <input
                 type="email"
                 name="email"
-                placeholder="Email Address"
+                placeholder={t('contact.form.email')}
                 value={formData.email}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
@@ -613,7 +618,7 @@ function HomePage() {
             <div className="mb-12">
               <textarea
                 name="message"
-                placeholder="Tell us about your project..."
+                placeholder={t('contact.form.message')}
                 rows={6}
                 value={formData.message}
                 onChange={handleInputChange}
@@ -633,12 +638,12 @@ function HomePage() {
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 mr-2 border-2 border-custom-light/30 border-t-custom-light rounded-full animate-spin"></div>
-                    Sending...
+                    {t('contact.form.sending')}
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-700" />
-                    Send Message
+                    {t('contact.form.sendMessage')}
                   </>
                 )}
               </span>
@@ -646,7 +651,7 @@ function HomePage() {
             
             {submitMessage && (
               <div className={`mt-6 p-4 rounded-xl text-center font-medium transition-all duration-700 ${
-                submitMessage.includes('Thank you') 
+                submitMessage === t('contact.form.successMessage')
                   ? 'bg-green-100 text-green-800 border border-green-200' 
                   : 'bg-red-100 text-red-800 border border-red-200'
               }`}>
@@ -674,33 +679,33 @@ function HomePage() {
                 <span className="ml-3 text-xl font-bold text-custom-light group-hover:text-custom-light/80 transition-all duration-700 tracking-wide bg-gradient-to-r from-custom-light to-custom-light/80 bg-clip-text text-transparent hover:from-custom-light/90 hover:to-custom-light/60 drop-shadow-sm">Genify AI</span>
               </div>
               <p className="text-custom-light/70 leading-relaxed text-base font-light hover:text-custom-light transition-colors duration-700">
-                Transforming business operations through intelligent optimization and seamless integration solutions.
+                {t('footer.description')}
               </p>
             </div>
 
             {/* Company */}
             <div className="animate-in slide-in-from-bottom duration-1000 delay-200">
-              <h3 className="font-bold text-custom-light mb-8 text-base">Company</h3>
+              <h3 className="font-bold text-custom-light mb-8 text-base">{t('footer.company')}</h3>
               <ul className="space-y-4">
-                <li><a href="#" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">About Us</a></li>
-                <li><a href="#" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">Success Stories</a></li>
+                <li><a href="#" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">{t('footer.aboutUs')}</a></li>
+                <li><a href="#" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">{t('footer.successStories')}</a></li>
               </ul>
             </div>
 
             {/* Legal */}
             <div className="animate-in slide-in-from-bottom duration-1000 delay-400">
-              <h3 className="font-bold text-custom-light mb-8 text-base">Legal</h3>
+              <h3 className="font-bold text-custom-light mb-8 text-base">{t('footer.legal')}</h3>
               <ul className="space-y-4">
-                <li><Link to="/privacy-policy" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">Privacy Policy</Link></li>
-                <li><Link to="/terms-of-service" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">Terms of Service</Link></li>
-                <li><Link to="/cookie-policy" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">Cookie Policy</Link></li>
+                <li><Link to="/privacy-policy" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">{t('footer.privacyPolicy')}</Link></li>
+                <li><Link to="/terms-of-service" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">{t('footer.termsOfService')}</Link></li>
+                <li><Link to="/cookie-policy" className="text-custom-light/70 hover:text-custom-light transition-all duration-700 text-sm hover:translate-x-2 block">{t('footer.cookiePolicy')}</Link></li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-custom-light/20 pt-12 mt-16">
             <p className="text-center text-custom-light/60 text-sm font-light hover:text-custom-light transition-colors duration-700 cursor-default">
-              © 2025 Genify AI. All rights reserved.
+              {t('footer.copyright')}
             </p>
           </div>
         </div>
