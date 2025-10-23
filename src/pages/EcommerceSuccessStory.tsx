@@ -68,8 +68,8 @@ function EcommerceSuccessStory() {
             <div className="flex justify-center lg:justify-end animate-in slide-in-from-right duration-1000 delay-300">
               <div className="relative">
                 <img 
-                  src="https://images.pexels.com/photos/1006070/pexels-photo-1006070.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop" 
-                  alt="E-commerce inventory management"
+                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=600&q=80" 
+                  alt="Modern e-commerce warehouse with automated inventory systems"
                   className="w-full h-96 object-cover rounded-3xl shadow-2xl hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-custom-dark/20 to-transparent rounded-3xl"></div>

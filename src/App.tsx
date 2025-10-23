@@ -504,8 +504,8 @@ function HomePage() {
             {/* Shopify Story */}
             <div className="bg-custom-light/40 backdrop-blur-xl border border-custom-light/60 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-custom-light/30 transition-all duration-700 group hover:-translate-y-4 hover:scale-105 animate-in slide-in-from-bottom duration-1000">
               <img 
-                src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" 
-                alt="Shopify store optimization"
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=600&q=80" 
+                alt="Modern e-commerce store with clean design"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="p-10">
@@ -524,8 +524,8 @@ function HomePage() {
             {/* Graphic Design Story */}
             <div className="bg-custom-light/40 backdrop-blur-xl border border-custom-light/60 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-custom-light/30 transition-all duration-700 group hover:-translate-y-4 hover:scale-105 animate-in slide-in-from-bottom duration-1000 delay-200">
               <img 
-                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" 
-                alt="Graphic design automation"
+                src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=600&q=80" 
+                alt="Professional graphic design workspace with modern tools"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="p-10">
@@ -544,8 +544,8 @@ function HomePage() {
             {/* E-commerce Story */}
             <div className="bg-custom-light/40 backdrop-blur-xl border border-custom-light/60 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-custom-light/30 transition-all duration-700 group hover:-translate-y-4 hover:scale-105 animate-in slide-in-from-bottom duration-1000 delay-500">
               <img 
-                src="https://images.pexels.com/photos/1006070/pexels-photo-1006070.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" 
-                alt="E-commerce automation"
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=600&q=80" 
+                alt="Modern warehouse with automated inventory management"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="p-10">
