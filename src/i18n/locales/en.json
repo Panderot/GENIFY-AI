@@ -7,8 +7,8 @@
     "getStarted": "Get Started"
   },
   "hero": {
-    "trustedBy": "Trusted by",
-    "businesses": "Businesses",
+    "trustedBy": "Trusted by ",
+    "businesses": " Businesses",
     "transformYour": "Transform Your",
     "businessOperations": "Business Operations",
     "description": "Increase efficiency and reduce costs with our intelligent automation solutions. Let us handle the repetitive work so you can focus on growth.",
